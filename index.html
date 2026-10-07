@@ -14,7 +14,7 @@
       <div class="progress"><span id="progressText">0 / 4</span></div>
     </header>
 
-    <!-- 홈 화면 -->
+    <!-- 1. 메인 홈 화면 -->
     <section id="home" class="screen active">
       <div class="hero">
         <div class="flower-mark" aria-hidden="true">✿</div>
@@ -32,7 +32,7 @@
       </div>
     </section>
 
-    <!-- 안내 화면 -->
+    <!-- 2. 이용 안내 화면 -->
     <section id="guide" class="screen">
       <div class="page-head">
         <span class="eyebrow">HOW TO PLAY</span>
@@ -41,12 +41,12 @@
       <div class="guide-list">
         <div class="guide-item"><b>01</b><span>전시장 곳곳에 숨겨진 <strong>4개의 QR 코드</strong>를 찾으세요.</span></div>
         <div class="guide-item"><b>02</b><span>기본 카메라로 QR을 스캔하면 자동으로 도장이 획득됩니다.</span></div>
-        <div class="guide-item"><b>03</b><span>순서 상관없이 4개 완료 시 보상 스크린샷이 나타납니다.</span></div>
+        <div class="guide-item"><b>03</b><span>4개 모두 스캔 완료 시 보상 스크린샷이 제공됩니다.</span></div>
       </div>
       <button class="secondary" onclick="goHome()">돌아가기</button>
     </section>
 
-    <!-- 미션 완료 팝업/화면 -->
+    <!-- 3. 도장 찍혔을 때 나오는 화면 -->
     <section id="mission" class="screen">
       <div class="mission-header">
         <button class="back" onclick="goHome()">←</button>
@@ -63,7 +63,7 @@
       </div>
     </section>
 
-    <!-- 4개 모두 완료 시 보상 화면 -->
+    <!-- 4. 4개 모두 모았을 때 보상 화면 -->
     <section id="complete" class="screen">
       <div class="complete-wrap">
         <div class="flower-bloom" aria-hidden="true">
@@ -73,30 +73,19 @@
         <h2>축하합니다!<br><em>모든 도장을 모았습니다.</em></h2>
         <p>아래 보상 이미지를 길게 눌러 저장하거나<br>화면을 스크린샷하여 소장하세요!</p>
         
-        <!-- 완주 보상 이미지 영역 -->
         <div class="reward-image-card">
-          <img src="reward.png" alt="완주 보상 이미지" id="rewardImg" onerror="this.src='https://via.placeholder.com/400x500/ff3c9e/ffffff?text=REWARD+IMAGE'">
+          <img src="reward.png" alt="보상 이미지" id="rewardImg" onerror="this.src='https://via.placeholder.com/400x500/ff3c9e/ffffff?text=REWARD+IMAGE'">
         </div>
 
         <button class="secondary" onclick="resetProgress()">진행상태 초기화</button>
       </div>
     </section>
 
+    <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
       <button onclick="goHome()" id="navHome">HOME</button>
-      <button onclick="showStatus()" id="navStatus">STATUS <span id="navCount">0</span></button>
+      <button onclick="showHomeGuide()" id="navStatus">GUIDE</button>
     </nav>
-
-    <!-- 현황 모달 -->
-    <div id="statusModal" class="modal">
-      <div class="modal-box">
-        <button class="modal-close" onclick="closeStatus()">×</button>
-        <p class="eyebrow">MISSION STATUS</p>
-        <h3 id="modalTitle">0 / 4 CLEARED</h3>
-        <div class="modal-dots" id="modalDots"></div>
-        <p class="modal-help">아직 찾지 못한 구역의 QR을 찾아 카메라로 스캔해보세요.</p>
-      </div>
-    </div>
   </main>
   <script src="script.js"></script>
 </body>
