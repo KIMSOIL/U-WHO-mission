@@ -54,6 +54,7 @@ function updateUI() {
   }
 }
 
+// QR 인식 시 도장 저장 및 주소 정리
 function processQR(n) {
   n = Number(n);
   if (n >= 1 && n <= 3) {
@@ -61,14 +62,17 @@ function processQR(n) {
       cleared.push(n);
       cleared.sort((a, b) => a - b);
       save();
-      alert(`🎉 ZONE 0${n} 도장이 채워졌습니다!`);
-    } else {
-      alert(`이미 도장을 받은 ZONE 0${n} 구역입니다.`);
+      
+      // 알림 후 URL에서 ?mission=1 지워주어 깔끔하게 메인 상태로 유지
+      setTimeout(() => {
+        alert(`🎉 ZONE 0${n} 도장을 획득했습니다!`);
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }, 100);
     }
   }
 }
 
-// 실시간 카메라 스캐너 시작
+// 웹 화면 내 카메라 스캐너 시작
 function startScanner() {
   const modal = document.getElementById("scannerModal");
   if (modal) modal.style.display = "flex";
@@ -81,23 +85,22 @@ function startScanner() {
     { facingMode: "environment" },
     { fps: 10, qrbox: { width: 220, height: 220 } },
     (decodedText) => {
-      // 💡 정규식을 사용해 주소 형태에 상관없이 mission=1, mission=2, mission=3 인식을 감지
+      // 💡 QR 인식 시, 해당 구역 주소로 '강제 페이지 이동(Location Redirect)' 수행!
       const match = decodedText.match(/mission=([1-3])/i);
-      
       if (match && match[1]) {
-        const missionNum = Number(match[1]);
+        const missionNum = match[1];
         
-        // 스캐너 중지 후 도장 처리 진행
+        // 카메라를 끄고 바로 이동
         stopScanner().then(() => {
-          processQR(missionNum);
+          window.location.href = `https://kimsoil.github.io/U-WHO-mission/?mission=${missionNum}`;
         });
       }
     },
     (errorMessage) => {
-      // 스캔 도중 미인식 오류 무시
+      // 스캔 중 단순 오류 무시
     }
   ).catch(err => {
-    alert("카메라 접근 권한을 허용해 주세요.");
+    alert("카메라 접근 권한이 필요합니다.");
     if (modal) modal.style.display = "none";
   });
 }
@@ -129,7 +132,7 @@ function resetProgress() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 주소창 파라미터 체크 (?mission=1 등)
+  // 접속 주소에 mission 번호가 있는지 확인
   const n = new URLSearchParams(window.location.search).get("mission");
   if (n) {
     processQR(n);
