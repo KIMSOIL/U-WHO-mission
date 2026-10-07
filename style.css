@@ -68,11 +68,12 @@ h2{font-size:34px;line-height:1.05;letter-spacing:-.06em}
 .bottom-nav button:first-child{color:var(--ink)}
 .bottom-nav span{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--pink);color:#fff;font-size:9px;margin-left:3px}
 
-/* 모달창 디스플레이 문제 수정 */
-.modal{position:fixed;inset:0;background:#00000055;display:grid;place-items:end center;z-index:10}
+/* display: none 으로 기본적으로 안 보이게 설정합니다 */
+.modal{position:fixed;inset:0;background:#00000055;display:none;place-items:end center;z-index:10}
+.modal.active{display:grid}
+
 .modal-box{width:min(520px,100%);background:#fff;border-radius:26px 26px 0 0;padding:30px 24px 36px;position:relative}
 .modal-close{position:absolute;right:18px;top:14px;border:0;background:none;font-size:28px;color:#aaa}
 .modal-box h3{font-size:28px;margin-bottom:20px}
 .modal-help{font-size:13px;line-height:1.6;color:var(--muted);margin-top:20px}
-
 @media(min-width:521px){.app{min-height:100vh}}
