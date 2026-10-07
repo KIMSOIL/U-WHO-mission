@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ff3c9e">
+  <title>U! WHO? — EXHIBITION MISSION</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="logo">U! WHO?</div>
+      <div class="progress"><span id="progressText">0 / 3</span></div>
+    </header>
+
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="flower-mark" aria-hidden="true">✿</div>
+        <p class="eyebrow">2026 GRADUATION EXHIBITION</p>
+        <h1>EXHIBITION<br><em>MISSION</em></h1>
+        <p class="lead">전시장 곳곳에 숨겨진 3개의 미션을 찾아보세요.<br>어떤 미션부터 시작해도 괜찮아요.</p>
+        <button class="primary" onclick="showHomeGuide()">MISSION START</button>
+      </div>
+      <div class="status-card">
+        <div>
+          <span>MISSION STATUS</span>
+          <strong id="homeStatus">0 / 3 CLEARED</strong>
+        </div>
+        <div class="dots" id="homeDots"></div>
+      </div>
+    </section>
+
+    <section id="guide" class="screen">
+      <div class="page-head">
+        <span class="eyebrow">HOW TO PLAY</span>
+        <h2>전시를 탐험하고<br><em>미션을 완성하세요.</em></h2>
+      </div>
+      <div class="guide-list">
+        <div class="guide-item"><b>01</b><span>전시장 곳곳의 <strong>QR CODE</strong>를 찾아보세요.</span></div>
+        <div class="guide-item"><b>02</b><span>QR을 찍고 해당 구역의 미션을 해결하세요.</span></div>
+        <div class="guide-item"><b>03</b><span>3개의 미션을 <strong>어떤 순서로든</strong> 완료하세요.</span></div>
+        <div class="guide-item"><b>04</b><span>ALL CLEAR 화면을 직원에게 보여주세요.</span></div>
+      </div>
+      <button class="secondary" onclick="goHome()">돌아가기</button>
+    </section>
+
+    <section id="mission" class="screen">
+      <div class="mission-header">
+        <button class="back" onclick="goHome()">←</button>
+        <span id="missionZone">ZONE 01</span>
+        <span class="small-status" id="missionStatus">0 / 3</span>
+      </div>
+      <div class="mission-body">
+        <p class="eyebrow" id="missionEyebrow">MISSION 01</p>
+        <h2 id="missionTitle"></h2>
+        <p class="mission-desc" id="missionDesc"></p>
+        <div id="missionContent"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="complete" class="screen">
+      <div class="complete-wrap">
+        <div class="flower-bloom" aria-hidden="true">
+          <span>✿</span><i></i><i></i><i></i><i></i>
+        </div>
+        <p class="eyebrow">ALL MISSION CLEAR</p>
+        <h2>YOUR FLOWER<br><em>HAS BLOOMED.</em></h2>
+        <p>전시장을 모두 탐험했습니다.<br>아래 화면을 STAFF에게 보여주세요.</p>
+        <div class="reward-card">
+          <span>REWARD</span>
+          <strong>🎁 SPECIAL GIFT</strong>
+          <small>직원 확인 후 보상을 받아가세요.</small>
+        </div>
+        <button class="secondary" onclick="resetProgress()">진행상태 초기화</button>
+      </div>
+    </section>
+
+    <nav class="bottom-nav">
+      <button onclick="goHome()" id="navHome">HOME</button>
+      <button onclick="showStatus()" id="navStatus">STATUS <span id="navCount">0</span></button>
+    </nav>
+
+    <div id="statusModal" class="modal" hidden>
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeStatus()">×</button>
+        <p class="eyebrow">MISSION STATUS</p>
+        <h3 id="modalTitle">0 / 3 CLEARED</h3>
+        <div class="modal-dots" id="modalDots"></div>
+        <p class="modal-help">아직 완료하지 않은 구역의 QR을 찾아 미션을 진행하세요.</p>
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
