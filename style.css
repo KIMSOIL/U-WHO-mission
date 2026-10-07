@@ -4,55 +4,54 @@ html,body{margin:0;padding:0;background:#e9e7ea;color:var(--ink);font-family:-ap
 body{min-height:100dvh}
 button,input{font:inherit}
 button{cursor:pointer}
+
 .app{position:relative;width:100%;max-width:520px;min-height:100dvh;margin:0 auto;background:var(--bg);overflow:hidden;box-shadow:0 0 40px #00000012}
 .topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);background:#ffffffd9;backdrop-filter:blur(14px);position:sticky;top:0;z-index:5}
 .logo{font-weight:900;letter-spacing:-.04em}
 .progress{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--pink)}
+
 .screen{display:none;min-height:calc(100dvh - 120px);padding:34px 22px 92px}
 .screen.active{display:block}
+
 .hero{padding:48px 4px 28px}
 .flower-mark{font-size:58px;line-height:1;color:var(--pink);margin-bottom:26px;animation:float 3s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-5px) rotate(5deg)}}
+
 .eyebrow{font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--pink);margin:0 0 12px}
 h1,h2,h3,p{margin-top:0}
 h1{font-size:52px;line-height:.9;letter-spacing:-.07em;margin-bottom:24px}
 h1 em,h2 em{font-style:normal;color:var(--pink)}
 .lead{font-size:15px;line-height:1.8;color:var(--muted);letter-spacing:-.02em}
+
 .primary,.secondary{width:100%;border:0;border-radius:16px;padding:17px 20px;font-weight:900;margin-top:26px}
 .primary{background:var(--pink);color:white;box-shadow:0 10px 24px #ff3c9e38}
 .secondary{background:white;color:var(--ink);border:1px solid var(--line)}
+
 .status-card{background:white;border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;align-items:center;justify-content:space-between}
 .status-card span{font-size:10px;letter-spacing:.12em;color:#aaa;font-weight:800;display:block;margin-bottom:5px}
 .status-card strong{font-size:14px}
+
 .dots,.modal-dots{display:flex;gap:7px}
 .dot{width:10px;height:10px;border-radius:50%;background:#ddd}
 .dot.done{background:var(--pink)}
+
 .page-head{padding:18px 0 24px}
 h2{font-size:34px;line-height:1.05;letter-spacing:-.06em}
 .guide-list{border-top:1px solid var(--line)}
 .guide-item{display:flex;gap:18px;padding:20px 2px;border-bottom:1px solid var(--line);line-height:1.6;font-size:14px}
 .guide-item b{color:var(--pink);font-size:12px;min-width:24px}
 .guide-item strong{color:var(--ink)}
+
 .mission-header{display:flex;align-items:center;justify-content:space-between;height:38px;margin-bottom:30px;font-size:12px;font-weight:900;letter-spacing:.08em}
 .back{border:0;background:none;font-size:25px;padding:0;color:var(--ink)}
 .small-status{color:#aaa;font-size:10px}
 .mission-body{padding-top:10px}
-.mission-desc{font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:28px}
-.mission-card{background:white;border:1px solid var(--line);border-radius:20px;padding:20px}
-.question{font-weight:900;font-size:18px;line-height:1.45;margin-bottom:18px}
-.options{display:grid;gap:10px}
-.option{width:100%;padding:15px;border:1px solid var(--line);border-radius:13px;background:#fff;text-align:left;font-weight:700}
-.option:hover{border-color:var(--pink);color:var(--pink)}
-.text-input{width:100%;padding:15px;border:1px solid var(--line);border-radius:13px;outline:none;background:#fff}
-.text-input:focus{border-color:var(--pink)}
-.submit{width:100%;margin-top:10px;padding:15px;border:0;border-radius:13px;background:var(--ink);color:#fff;font-weight:900}
-.hint{font-size:12px;color:#aaa;line-height:1.6;margin-top:12px}
-.feedback{min-height:30px;margin-top:18px;font-weight:800;font-size:14px}
-.feedback.ok{color:#11a36a}
-.feedback.no{color:#e84c70}
+.mission-desc{font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:10px}
+
 .clear-box{text-align:center;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 20px}
 .clear-icon{font-size:48px;color:var(--pink)}
-.complete-wrap{text-align:center;padding:54px 4px 30px}
+
+.complete-wrap{text-align:center;padding:30px 4px}
 .flower-bloom{position:relative;width:140px;height:140px;margin:0 auto 28px}
 .flower-bloom span{position:absolute;inset:37px;display:grid;place-items:center;font-size:52px;color:#fff;background:var(--pink);border-radius:50%;z-index:2}
 .flower-bloom i{position:absolute;width:62px;height:80px;background:#ff8cc7;border-radius:50%;left:39px;top:30px;transform-origin:31px 40px}
@@ -60,25 +59,21 @@ h2{font-size:34px;line-height:1.05;letter-spacing:-.06em}
 .flower-bloom i:nth-child(3){transform:rotate(72deg) translateY(-25px)}
 .flower-bloom i:nth-child(4){transform:rotate(144deg) translateY(-25px)}
 .flower-bloom i:nth-child(5){transform:rotate(216deg) translateY(-25px)}
-.complete-wrap h2{font-size:38px}
-.complete-wrap>p:not(.eyebrow){color:var(--muted);line-height:1.7}
-.reward-card{margin-top:26px;background:var(--ink);color:white;border-radius:20px;padding:22px}
-.reward-card span{display:block;color:#ff7cbd;font-size:10px;font-weight:900;letter-spacing:.16em;margin-bottom:8px}
-.reward-card strong{display:block;font-size:22px}
-.reward-card small{display:block;margin-top:8px;color:#aaa}
+
+.reward-image-card{margin-top:20px;border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.12)}
+.reward-image-card img{width:100%;height:auto;display:block}
+
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);height:56px;background:#fffefee8;border-top:1px solid var(--line);backdrop-filter:blur(14px);display:flex;z-index:6}
 .bottom-nav button{flex:1;border:0;background:none;font-size:10px;font-weight:900;letter-spacing:.12em;color:#999}
 .bottom-nav button:first-child{color:var(--ink)}
 .bottom-nav span{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--pink);color:#fff;font-size:9px;margin-left:3px}
-/* display: grid; 를 제거하거나 hidden 일 때 숨겨지도록 변경합니다 */
-.modal{position:fixed;inset:0;background:#00000055;place-items:end center;z-index:10}
-.modal:not([hidden]){display:grid}
+
+/* 모달창 디스플레이 문제 수정 */
+.modal{position:fixed;inset:0;background:#00000055;display:none;place-items:end center;z-index:10}
+.modal.active{display:grid}
 .modal-box{width:min(520px,100%);background:#fff;border-radius:26px 26px 0 0;padding:30px 24px 36px;position:relative}
 .modal-close{position:absolute;right:18px;top:14px;border:0;background:none;font-size:28px;color:#aaa}
 .modal-box h3{font-size:28px;margin-bottom:20px}
 .modal-help{font-size:13px;line-height:1.6;color:var(--muted);margin-top:20px}
+
 @media(min-width:521px){.app{min-height:100vh}}
-/* 팝업 닫기 기능 수정 */
-#statusModal[hidden] {display: none !important;}
-.modal{position:fixed;inset:0;background:#00000055;display:none;place-items:end center;z-index:10}
-.modal.active{display:grid}
