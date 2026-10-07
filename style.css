@@ -70,7 +70,9 @@ h2{font-size:34px;line-height:1.05;letter-spacing:-.06em}
 .bottom-nav button{flex:1;border:0;background:none;font-size:10px;font-weight:900;letter-spacing:.12em;color:#999}
 .bottom-nav button:first-child{color:var(--ink)}
 .bottom-nav span{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--pink);color:#fff;font-size:9px;margin-left:3px}
-.modal{position:fixed;inset:0;background:#00000055;display:grid;place-items:end center;z-index:10}
+/* display: grid; 를 제거하거나 hidden 일 때 숨겨지도록 변경합니다 */
+.modal{position:fixed;inset:0;background:#00000055;place-items:end center;z-index:10}
+.modal:not([hidden]){display:grid}
 .modal-box{width:min(520px,100%);background:#fff;border-radius:26px 26px 0 0;padding:30px 24px 36px;position:relative}
 .modal-close{position:absolute;right:18px;top:14px;border:0;background:none;font-size:28px;color:#aaa}
 .modal-box h3{font-size:28px;margin-bottom:20px}
