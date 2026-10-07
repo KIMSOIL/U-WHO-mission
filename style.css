@@ -76,3 +76,7 @@ h2{font-size:34px;line-height:1.05;letter-spacing:-.06em}
 .modal-box h3{font-size:28px;margin-bottom:20px}
 .modal-help{font-size:13px;line-height:1.6;color:var(--muted);margin-top:20px}
 @media(min-width:521px){.app{min-height:100vh}}
+/* 팝업 닫기 기능 수정 */
+#statusModal[hidden] {
+  display: none !important;
+}
