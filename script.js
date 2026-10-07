@@ -1,89 +1,90 @@
-const missions = {
-  1: { zone: "ZONE 01", title: "1번 도장 획득!", desc: "ZONE 01 미션을 완료했습니다." },
-  2: { zone: "ZONE 02", title: "2번 도장 획득!", desc: "ZONE 02 미션을 완료했습니다." },
-  3: { zone: "ZONE 03", title: "3번 도장 획득!", desc: "ZONE 03 미션을 완료했습니다." },
-  4: { zone: "ZONE 04", title: "4번 도장 획득!", desc: "ZONE 04 미션을 완료했습니다." }
-};
-
-const TOTAL_MISSIONS = 4;
+// 미션 3개 (A, B, C 구역)
+const TOTAL_MISSIONS = 3;
 let cleared = JSON.parse(localStorage.getItem("uWhoMissionCleared") || "[]").map(Number);
 
-function save(){ 
-  localStorage.setItem("uWhoMissionCleared", JSON.stringify(cleared)); 
-  updateUI(); 
-}
-
-function isCleared(n){ return cleared.includes(Number(n)); }
-
-function updateUI(){
-  const count = cleared.length;
-  document.getElementById("progressText").textContent = `${count} / ${TOTAL_MISSIONS}`;
-  document.getElementById("homeStatus").textContent = `${count} / ${TOTAL_MISSIONS} CLEARED`;
-  document.getElementById("missionStatus").textContent = `${count} / ${TOTAL_MISSIONS}`;
-  renderDots(document.getElementById("homeDots"));
-}
-
-function renderDots(el){
-  if(!el) return;
-  el.innerHTML = [1,2,3,4].map(n=>`<span class="dot ${isCleared(n)?"done":""}"></span>`).join("");
-}
-
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  window.scrollTo({top:0, behavior:"smooth"});
+function save() {
+  localStorage.setItem("uWhoMissionCleared", JSON.stringify(cleared));
   updateUI();
 }
 
-function goHome(){ showScreen("home"); }
-function showHomeGuide(){ showScreen("guide"); }
+function isCleared(n) {
+  return cleared.includes(Number(n));
+}
 
-// QR 스캔 시 자동으로 미션 완료 처리
-function processQR(n){
-  n = Number(n);
-  if(!missions[n]) {
-    goHome();
-    return;
-  }
+function updateUI() {
+  const count = cleared.length;
+  
+  // 카운터 업데이트
+  document.getElementById("progressText").textContent = `${count} / ${TOTAL_MISSIONS}`;
+  document.getElementById("flowerCenterText").textContent = count === 3 ? "✿" : `${count}/3`;
 
-  if(!isCleared(n)){
-    cleared.push(n);
-    cleared.sort((a,b)=>a-b);
-    save();
-  }
+  // 꽃잎 애니메이션 상태 업데이트
+  [1, 2, 3].forEach(n => {
+    const petal = document.getElementById(`petal${n}`);
+    if (isCleared(n)) {
+      petal.classList.add("active");
+    } else {
+      petal.classList.remove("active");
+    }
+  });
 
-  if(cleared.length === TOTAL_MISSIONS){
-    showScreen("complete");
+  // 구역별 텍스트 업데이트
+  const zones = ["A", "B", "C"];
+  zones.forEach((z, idx) => {
+    const el = document.getElementById(`zone${z}`);
+    if (isCleared(idx + 1)) {
+      el.classList.add("done");
+      el.querySelector("strong").textContent = "완료 ✓";
+    } else {
+      el.classList.remove("done");
+      el.querySelector("strong").textContent = "미완료";
+    }
+  });
+
+  // 3개 모았을 때 보상 영역 표시
+  const rewardSec = document.getElementById("rewardSection");
+  if (count === TOTAL_MISSIONS) {
+    rewardSec.style.display = "block";
   } else {
-    document.getElementById("missionZone").textContent = missions[n].zone;
-    document.getElementById("missionTitle").textContent = missions[n].title;
-    document.getElementById("missionDesc").textContent = missions[n].desc;
-    showScreen("mission");
+    rewardSec.style.display = "none";
   }
 }
 
-function resetProgress(){
-  if(confirm("진행상태를 초기화할까요?")){
+// QR 스캔 진입 처리 (?mission=1 -> A, ?mission=2 -> B, ?mission=3 -> C)
+function processQR(n) {
+  n = Number(n);
+  if (n >= 1 && n <= 3 && !isCleared(n)) {
+    cleared.push(n);
+    cleared.sort((a, b) => a - b);
+    save();
+    
+    // 주소창 깔끔하게 제거 (?mission=1 파라미터 삭제)
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+}
+
+// 모바일 기본 카메라 열기 호출
+function openCamera() {
+  // 모바일 환경에서 기본 카메라 또는 QR 스캐너를 띄우도록 모바일 intent 호출
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (isMobile) {
+    alert("기본 카메라 App을 열어 전시장 QR을 스캔해주세요!");
+  } else {
+    alert("모바일 기기의 기본 카메라 앱으로 전시장 QR을 스캔해 주세요.");
+  }
+}
+
+function resetProgress() {
+  if (confirm("진행상태를 초기화하시겠습니까?")) {
     cleared = [];
     save();
-    goHome();
   }
 }
 
-function routeFromQR(){
-  const n = new URLSearchParams(location.search).get("mission");
-  if(n) {
+document.addEventListener("DOMContentLoaded", () => {
+  const n = new URLSearchParams(window.location.search).get("mission");
+  if (n) {
     processQR(n);
-  } else {
-    if(cleared.length === TOTAL_MISSIONS){
-      showScreen("complete");
-    } else {
-      goHome();
-    }
   }
-}
-
-document.addEventListener("DOMContentLoaded", ()=>{
   updateUI();
-  routeFromQR();
 });
